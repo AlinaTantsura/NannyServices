@@ -1,4 +1,3 @@
-// import sprite from "./assets/sprite.svg";
 import { lazy } from "react";
 import { Route, Routes } from "react-router-dom";
 import Layout from "./components/Layout/Layout";
