@@ -26,4 +26,9 @@ export const NavigationLink = styled(Link)`
   display: flex;
   flex-direction: column;
   justify-content: center;
+  transition: var(--transition);
+  &:hover,
+  &:focus{
+    font-family: var(--font-family-500);
+  }
 `;

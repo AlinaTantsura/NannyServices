@@ -10,4 +10,6 @@ export const Container = styled.div`
     background-color: var(--main-color);
     z-index: -1;
     overflow: hidden;
+    display: flex;
+    justify-content: space-between;
 `;
