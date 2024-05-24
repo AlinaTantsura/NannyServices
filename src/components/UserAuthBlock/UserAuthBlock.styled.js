@@ -15,7 +15,7 @@ export const UserInfoBox = styled.div`
 export const IconBox = styled.div`
   width: 40px;
   height: 40px;
-  background-color: var(--text-white);
+  background-color: var(--main-white);
   border-radius: 8px;
   display: flex;
   justify-content: center;
@@ -23,7 +23,7 @@ export const IconBox = styled.div`
 `;
 
 export const TextStyled = styled.p`
-  color: var(--text-white);
+  color: var(--main-white);
   font-size: 18px;
   line-height: 111%;
   letter-spacing: -0.01em;

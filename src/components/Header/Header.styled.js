@@ -21,7 +21,7 @@ export const HeaderStyledHome = styled(HeaderStyled)`
 `;
 
 export const LogoLink = styled(Link)`
-  color: var(--text-white);
+  color: var(--main-white);
   font-size: 24px;
   line-height: 100%;
 `;

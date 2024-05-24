@@ -11,13 +11,13 @@ export const NavigationList = styled.nav`
     width: 8px;
     height: 8px;
     border-radius: 50%;
-    background-color: var(--text-white);
+    background-color: var(--main-white);
     align-self: center;
   }
 `;
 
 export const NavigationLink = styled(Link)`
-  color: var(--text-white);
+  color: var(--main-white);
   font-family: var(--font-family-400);
   font-size: 16px;
   line-height: 125%;

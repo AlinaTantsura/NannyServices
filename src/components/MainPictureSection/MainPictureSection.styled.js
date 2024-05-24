@@ -27,7 +27,7 @@ export const NanniesInfoBox = styled.div`
     width: 284px;
     height: 118px;
     border-radius: 20px;
-    background-color: var(--text-white);
+    background-color: var(--main-white);
     z-index: 11;
     display: flex;
     gap: 16px;

@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const ButtonStyled = styled.button`
     padding: 14px 40px;
-    color: var(--text-white);
+    color: var(--main-white);
     font-size: 16px;
     line-height: 125%;
     letter-spacing: -0.01em;

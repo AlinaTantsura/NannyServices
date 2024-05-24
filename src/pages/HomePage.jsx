@@ -3,6 +3,7 @@ import MainPictureSection from "../components/MainPictureSection/MainPictureSect
 import { Container } from "./Container.styled"
 
 const HomePage = () => {
+  
   return (
     <main>
       <Container>

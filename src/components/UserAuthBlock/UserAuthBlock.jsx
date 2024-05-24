@@ -9,9 +9,13 @@ import {
 import sprite from "../images/sprite.svg";
 import { useState } from "react";
 import Button from "../Button/Button";
+import LoginModal from "../LoginModal/LoginModal";
+import RegisterModal from "../RegisterModal/RegisterModal";
 
 const UserAuthBlock = () => {
-    const [isLogIn] = useState(false);
+  const [isLogIn] = useState(false);
+  const [isOpenLoginModal, setIsOpenLoginModal] = useState(false);
+  const [isOpenRegisterModal, setIsOpenRegisterModal] = useState(false);
 
     return (
          isLogIn ? (
@@ -27,9 +31,11 @@ const UserAuthBlock = () => {
               <ButtonLog>Log out</ButtonLog>
             </UserBlock>     
         ) : (<AuthBox>
-                <ButtonLog>Log In</ButtonLog>
-                <Button>Registration</Button>
-      </AuthBox>) 
+                <ButtonLog onClick={() => setIsOpenLoginModal(true)}>Log In</ButtonLog>
+                <LoginModal open={isOpenLoginModal} onClose={() => setIsOpenLoginModal(false)} />
+                <Button onClick={() => setIsOpenRegisterModal(true)}>Registration</Button>
+                <RegisterModal open={isOpenRegisterModal} onClose={() => setIsOpenRegisterModal(false)} />
+      </AuthBox>)
   );
 };
 
