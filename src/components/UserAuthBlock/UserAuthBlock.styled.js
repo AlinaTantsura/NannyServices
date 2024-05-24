@@ -31,6 +31,7 @@ export const TextStyled = styled.p`
 
 export const ButtonLog = styled(ButtonStyled)`
     border: solid 1px rgba(251, 251, 251, 0.4);
+    background-color: transparent;
     padding: 14px 39px;
 `
 
