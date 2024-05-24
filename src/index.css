@@ -18,6 +18,7 @@
   --main-color: #0957C3;
   --main-white: #FBFBFB;
   --text-black: #11101c;
+  --transition: all 0.4s easy-in-out;
 }
 
 *{
@@ -25,6 +26,7 @@
   font-family: var(--font-family-500);
   font-weight: 500;
   font-size: 16px;
+  color: var(--text-black);
   margin: 0;
   padding: 0;
 }
