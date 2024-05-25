@@ -1,14 +1,28 @@
 import sprite from "../images/sprite.svg";
 import ReactDOM from "react-dom";
 import { BackdropStyled, CloseBtn, ModalStyled } from "./ModalWindow.styled";
+import { useEffect } from "react";
 
 // eslint-disable-next-line react/prop-types
 const ModalWindow = ({ open, children, onClose }) => {
+
+    useEffect(() => {
+        const handleCloseModalByEsc = (e) => {
+            if(e.key === "Escape") onClose(false)
+        }
+        document.addEventListener("keyup", handleCloseModalByEsc)
+        return () => {
+            document.removeEventListener("keyup", handleCloseModalByEsc)
+        }
+    }, [onClose]);
+
     if (!open) return null
+
+    
     
   return ReactDOM.createPortal(
-      <BackdropStyled>
-          <ModalStyled>
+      <BackdropStyled onClick={onClose}>
+          <ModalStyled onClick={(e) => e.stopPropagation()}>
               <CloseBtn onClick={onClose}>
                 <svg width="30" height="30">
                     <use href={sprite + "#icon-x"} />

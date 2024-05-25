@@ -42,3 +42,9 @@ export const FormDescription = styled.h2`
   color: rgba(17, 16, 28, 0.5);
   margin-bottom: 40px;
 `;
+
+export const ErrorMessage = styled.p`
+    color: red;
+    font-size: 10px;
+    margin-top: -15px;
+`;
