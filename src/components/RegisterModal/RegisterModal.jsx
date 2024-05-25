@@ -1,6 +1,5 @@
 /* eslint-disable react/prop-types */
 import * as yup from "yup";
-import { createUserWithEmailAndPassword } from "firebase/auth";
 import ModalWindow from "../ModalWindow/ModalWindow";
 import Button from "../Button/Button";
 import { RegisterForm } from "./RegisterModal.styled";
@@ -17,9 +16,8 @@ import {
   PassInputBox,
 } from "../LoginModal/LoginModal.styled";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { auth } from "../../firebase/firebase";
 import { useDispatch } from "react-redux";
-import { setUser } from "../../redux-toolkit/user/userSlice";
+import { registerUser } from "../../redux-toolkit/user/operations";
 
 const RegisterFormValidateSchema = yup.object().shape({
   name: yup.string().trim().required("Name is required").min(2),
@@ -45,14 +43,13 @@ const RegisterModal = ({ open, onClose }) => {
     setIsShownPass(true);
   };
 
-  const handleRegisterSubmit = ({email, password, name}) => {
-    createUserWithEmailAndPassword(auth, email, password, name)
-      .then((userCredential) => {
-        const user = userCredential.user;
-        console.log(user)
-        dispatch(setUser({email: user.email, token: user.accessToken, id: user.uid, name: user.displayName}));
-      })
-      .catch(console.error);
+  const handleRegisterSubmit = ({ email, password, name }) => {
+    const dataUser = {
+      email,
+      password,
+      name
+    }
+    dispatch(registerUser(dataUser));
     reset();
     onClose(true);
   };

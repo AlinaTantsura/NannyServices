@@ -16,6 +16,8 @@ import Button from "../Button/Button";
 import sprite from "../images/sprite.svg";
 import { useState } from "react";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { useDispatch } from "react-redux";
+import { logInUser } from "../../redux-toolkit/user/operations";
 
 const LoginFormValidateSchema = yup.object().shape({
   email: yup
@@ -28,6 +30,7 @@ const LoginFormValidateSchema = yup.object().shape({
 
 const LoginModal = ({ open, onClose }) => {
   const [isShownPass, setIsShownPass] = useState(false);
+  const dispatch = useDispatch();
   const {
     register,
     handleSubmit,
@@ -40,7 +43,7 @@ const LoginModal = ({ open, onClose }) => {
     setIsShownPass(true);
   };
   const handleSubmitLogin = (data) => {
-    console.log(data);
+    dispatch(logInUser(data));
     reset();
     onClose(true);
   };
