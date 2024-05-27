@@ -1,6 +1,13 @@
+import SelectCategoriesForm from "../components/SelectCategoriesForm/SelectCategoriesForm"
+import { MainContainer } from "./Container.styled"
+
 const NanniesPage = () => {
+
   return (
-    <div>Nannies</div>
+    <MainContainer>
+      <SelectCategoriesForm />
+
+    </MainContainer>
   )
 }
 

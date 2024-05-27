@@ -18,6 +18,7 @@
   --main-color: #0957C3;
   --main-white: #FBFBFB;
   --text-black: #11101c;
+  --text-gray: #8a8a89;
   --transition: all 0.4s easy-in-out;
 }
 
@@ -31,6 +32,9 @@
   padding: 0;
 }
 
+body{
+  background-color: #F3F3F3;
+}
 ul{
   list-style: none;
 }

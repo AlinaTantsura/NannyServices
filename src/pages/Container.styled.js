@@ -13,3 +13,7 @@ export const Container = styled.div`
     display: flex;
     justify-content: space-between;
 `;
+
+export const MainContainer = styled.main`
+    padding: 64px 128px 100px;
+`;
