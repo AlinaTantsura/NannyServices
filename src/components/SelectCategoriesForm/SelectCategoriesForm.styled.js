@@ -32,6 +32,7 @@ export const SelectButtonStyled = styled(ButtonStyled)`
 `;
 
 export const OptionsList = styled.ul`
+  position: relative;
   border-radius: 14px;
   width: 226px;
   padding: 18px 0;
@@ -40,10 +41,13 @@ export const OptionsList = styled.ul`
   display: flex;
   flex-direction: column;
   gap: 12px;
+  z-index: 2;
 `;
 
 export const Option = styled.li`
   font-family: var(--font-family-400);
+  font-size: 18px;
+  line-height: 111%;
   color: rgba(17, 16, 28, 0.3);
   cursor: pointer;
   padding: 0 18px;

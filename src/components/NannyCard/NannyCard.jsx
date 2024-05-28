@@ -1,3 +1,4 @@
+import { useState } from "react";
 import Button from "../Button/Button";
 import sprite from "../images/sprite.svg";
 import {
@@ -26,8 +27,12 @@ import {
   NameText,
   ReviewDescriptionText,
 } from "./NannyCard.styled";
+import AppointmentModal from "../AppointmentModal/AppointmentModal";
 
 const NannyCard = () => {
+  const [isOpenAllInfo, setIsOpenAllInfo] = useState(false);
+  const [isOpenModal, setIsOpenModal] = useState(false);
+
   return (
     <CardBox>
       <ImgBox>
@@ -61,50 +66,61 @@ const NannyCard = () => {
           aperiam consequatur qui sapiente possimus? Quasi ducimus illum aliquam
           vitae tenetur nam.
         </DescriptionText>
-        <StyledReadMoreButton>Read more</StyledReadMoreButton>
-        <ReviewsBox>
-          <ReviewCard>
-            <TitleBlockReviewCard>
-              <ImgLetter>N</ImgLetter>
-              <NameReviewBox>
-                <NameText>Name</NameText>
-                <RatingText>
-                  <svg width="16" height="16">
-                    <use href={sprite + "#icon-star"} />
-                  </svg>
-                  4.5
-                </RatingText>
-              </NameReviewBox>
-            </TitleBlockReviewCard>
-            <ReviewDescriptionText>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis
-              eveniet consequuntur beatae quasi, delectus voluptatem molestias
-              facere sapiente unde natus quod libero possimus illum pariatur
-              saepe iure aperiam vitae eligendi!
-            </ReviewDescriptionText>
-          </ReviewCard>
-          <ReviewCard>
-            <TitleBlockReviewCard>
-              <ImgLetter>N</ImgLetter>
-              <NameReviewBox>
-                <NameText>Name</NameText>
-                <RatingText>
-                  <svg width="16" height="16">
-                    <use href={sprite + "#icon-star"} />
-                  </svg>
-                  4.5
-                </RatingText>
-              </NameReviewBox>
-            </TitleBlockReviewCard>
-            <ReviewDescriptionText>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis
-              eveniet consequuntur beatae quasi, delectus voluptatem molestias
-              facere sapiente unde natus quod libero possimus illum pariatur
-              saepe iure aperiam vitae eligendi!
-            </ReviewDescriptionText>
-          </ReviewCard>
-        </ReviewsBox>
-        <Button>Make an appointment</Button>
+        {isOpenAllInfo ? (
+          <>
+            <ReviewsBox>
+              <ReviewCard>
+                <TitleBlockReviewCard>
+                  <ImgLetter>N</ImgLetter>
+                  <NameReviewBox>
+                    <NameText>Name</NameText>
+                    <RatingText>
+                      <svg width="16" height="16">
+                        <use href={sprite + "#icon-star"} />
+                      </svg>
+                      4.5
+                    </RatingText>
+                  </NameReviewBox>
+                </TitleBlockReviewCard>
+                <ReviewDescriptionText>
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis
+                  eveniet consequuntur beatae quasi, delectus voluptatem
+                  molestias facere sapiente unde natus quod libero possimus
+                  illum pariatur saepe iure aperiam vitae eligendi!
+                </ReviewDescriptionText>
+              </ReviewCard>
+              <ReviewCard>
+                <TitleBlockReviewCard>
+                  <ImgLetter>N</ImgLetter>
+                  <NameReviewBox>
+                    <NameText>Name</NameText>
+                    <RatingText>
+                      <svg width="16" height="16">
+                        <use href={sprite + "#icon-star"} />
+                      </svg>
+                      4.5
+                    </RatingText>
+                  </NameReviewBox>
+                </TitleBlockReviewCard>
+                <ReviewDescriptionText>
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis
+                  eveniet consequuntur beatae quasi, delectus voluptatem
+                  molestias facere sapiente unde natus quod libero possimus
+                  illum pariatur saepe iure aperiam vitae eligendi!
+                </ReviewDescriptionText>
+              </ReviewCard>
+            </ReviewsBox>
+            <Button type="button" onClick={() => setIsOpenModal(true)}>Make an appointment</Button>
+            {isOpenModal && <AppointmentModal open={isOpenModal} onClose={() => setIsOpenModal(false)} />}
+          </>
+        ) : (
+          <StyledReadMoreButton
+            type="button"
+            onClick={() => setIsOpenAllInfo(true)}
+          >
+            Read more
+          </StyledReadMoreButton>
+        )}
       </div>
       <AdditionalInfoBox>
         <AdditionalInfoItem>

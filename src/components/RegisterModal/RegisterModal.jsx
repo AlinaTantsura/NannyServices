@@ -2,13 +2,13 @@
 import * as yup from "yup";
 import ModalWindow from "../ModalWindow/ModalWindow";
 import Button from "../Button/Button";
-import { RegisterForm } from "./RegisterModal.styled";
 import sprite from "../images/sprite.svg";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import {
   ErrorMessage,
   FormDescription,
+  FormStyled,
   FormTitle,
   IconEye,
   InputsBox,
@@ -56,7 +56,7 @@ const RegisterModal = ({ open, onClose }) => {
 
   return (
     <ModalWindow open={open} onClose={onClose}>
-      <RegisterForm onSubmit={handleSubmit(handleRegisterSubmit)}>
+      <FormStyled onSubmit={handleSubmit(handleRegisterSubmit)}>
         <FormTitle>Registration</FormTitle>
         <FormDescription>
           Thank you for your interest in our platform! In order to register, we
@@ -82,7 +82,7 @@ const RegisterModal = ({ open, onClose }) => {
           <ErrorMessage>{errors.password?.message}</ErrorMessage>
         </InputsBox>
         <Button>Register</Button>
-      </RegisterForm>
+      </FormStyled>
     </ModalWindow>
   );
 };

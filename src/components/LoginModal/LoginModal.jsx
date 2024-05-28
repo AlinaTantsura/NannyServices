@@ -6,7 +6,7 @@ import {
   IconEye,
   InputsBox,
   InputStyled,
-  LogInForm,
+  FormStyled,
   PassInputBox,
   FormTitle,
   FormDescription,
@@ -49,7 +49,7 @@ const LoginModal = ({ open, onClose }) => {
   };
   return (
     <ModalWindow open={open} onClose={onClose}>
-      <LogInForm onSubmit={handleSubmit(handleSubmitLogin)}>
+      <FormStyled onSubmit={handleSubmit(handleSubmitLogin)}>
         <FormTitle>Log In</FormTitle>
         <FormDescription>
           Welcome back! Please enter your credentials to access your account and
@@ -80,7 +80,7 @@ const LoginModal = ({ open, onClose }) => {
           <ErrorMessage>{errors.password?.message}</ErrorMessage>
         </InputsBox>
         <Button>Log In</Button>
-      </LogInForm>
+      </FormStyled>
     </ModalWindow>
   );
 };

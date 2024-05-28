@@ -16,4 +16,5 @@ export const Container = styled.div`
 
 export const MainContainer = styled.main`
     padding: 64px 128px 100px;
+    position: relative;
 `;
