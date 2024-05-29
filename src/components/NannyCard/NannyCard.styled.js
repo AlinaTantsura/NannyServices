@@ -137,14 +137,14 @@ export const StyledFavButton = styled.button`
   display: flex;
 `;
 
-export const ReviewsBox = styled.div`
+export const ReviewsBox = styled.ul`
   margin: 24px 0;
   display: flex;
   flex-direction: column;
   gap: 25px;
 `;
 
-export const ReviewCard = styled.div`
+export const ReviewCardStyled = styled.li`
   width: 482px;
 `;
 

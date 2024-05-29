@@ -7,7 +7,16 @@ const nanniesSlice = createSlice({
         isLoading: false,
         error: null,
         data: null,
+        favoriteList: [],
     },
+    reducers:{
+        addToTheFavorite(state, action) {
+            state.favoriteList.push(action.payload)
+        },
+        // removeFromTheFavorite(state) {
+            
+        // }
+  },
     extraReducers: (builder) => {
         builder.addCase(getNanniesData.pending, (state) => {
             state.isLoading = true;
@@ -24,4 +33,5 @@ const nanniesSlice = createSlice({
     }
 });
 
+export const { addToTheFavorite } = nanniesSlice.actions;
 export default nanniesSlice.reducer;

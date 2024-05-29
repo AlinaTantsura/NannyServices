@@ -4,11 +4,13 @@ import NannyCard from "../NannyCard/NannyCard";
 import { NanniesListContainer, NanniesListStyled } from "./NanniesList.styled";
 import { getNanniesData } from "../../redux-toolkit/fetchNaniesData/operations";
 import { useDispatch, useSelector } from "react-redux";
-import { selectData } from "../../redux-toolkit/fetchNaniesData/selectors";
+import { selectData, selectFavoriteList } from "../../redux-toolkit/fetchNaniesData/selectors";
 
 const NanniesList = () => {
   const data = useSelector(selectData);
   const dispatch = useDispatch();
+  const favList = useSelector(selectFavoriteList);
+  console.log(favList)
 
   useEffect(() => {
     const fetchData = () => {

@@ -61,7 +61,7 @@ const AppointmentFormValidateSchema = yup.object().shape({
 const date = new Date();
 const timeNow = `${date.getHours()}:${date.getMinutes()}`
 
-const AppointmentModal = ({ open, onClose }) => {
+const AppointmentModal = ({ imgURL, name, open, onClose }) => {
   const {
     register,
     handleSubmit,
@@ -70,8 +70,6 @@ const AppointmentModal = ({ open, onClose }) => {
   } = useForm({ resolver: yupResolver(AppointmentFormValidateSchema) });
   const [isOpenTimeDrop, setIsOpenTimeDrop] = useState(false);
   const [timeValue, setTimeValue] = useState(timeNow);
-
-
 
   const handleSubmitForm = (data) => {
     console.log(data);
@@ -96,10 +94,10 @@ const AppointmentModal = ({ open, onClose }) => {
           below so we can match you with the perfect care partner.
         </FormDescription>
         <NannyInfoBox>
-          <PhotoOfNanny />
+          <PhotoOfNanny src={imgURL} alt="Photo of nanny" />
           <NameBlock>
             <AddNameText>Your nanny</AddNameText>
-            <p>Name</p>
+            <p>{name}</p>
           </NameBlock>
         </NannyInfoBox>
         <InputsBox>

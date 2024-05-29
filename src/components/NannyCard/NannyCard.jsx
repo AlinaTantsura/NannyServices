@@ -20,22 +20,22 @@ import {
   StyledFavButton,
   StyledPriceSpan,
   ReviewsBox,
-  ReviewCard,
-  TitleBlockReviewCard,
-  ImgLetter,
-  RatingText,
-  NameReviewBox,
-  NameText,
-  ReviewDescriptionText,
   GreenCircleBox,
   GreenCircle,
 } from "./NannyCard.styled";
 import AppointmentModal from "../AppointmentModal/AppointmentModal";
+import ReviewCard from "./ReviewCard";
+import { addToTheFavorite } from "../../redux-toolkit/fetchNaniesData/nanniesSlice";
+import { useDispatch } from "react-redux";
+// import { useSelector } from "react-redux";
+// import { selectIsLogIn } from "../../redux-toolkit/user/selectors";
 
 // eslint-disable-next-line react/prop-types
 const NannyCard = ({ data }) => {
   const [isOpenAllInfo, setIsOpenAllInfo] = useState(false);
   const [isOpenModal, setIsOpenModal] = useState(false);
+  const dispatch = useDispatch();
+  // const isLogin = useSelector(selectIsLogIn);
 
   const countAge = (birthdayData) => {
     const today = new Date();
@@ -59,7 +59,7 @@ const NannyCard = ({ data }) => {
   return (
     <CardBox>
       <ImgBox>
-        <PhotoOfNanny src={data.avatar_url} />
+        <PhotoOfNanny src={data.avatar_url} alt="Photo of nanny"/>
         <GreenCircleBox>
           <GreenCircle />
         </GreenCircleBox>
@@ -72,7 +72,10 @@ const NannyCard = ({ data }) => {
         <InfoBoxesContainer>
           <InfoBox>
             <InfoText>
-              Age: <TextHighlight style={{textDecoration: "underline"}}>{countAge(data.birthday)}</TextHighlight>
+              Age:{" "}
+              <TextHighlight style={{ textDecoration: "underline" }}>
+                {countAge(data.birthday)}
+              </TextHighlight>
             </InfoText>
           </InfoBox>
           <InfoBox>
@@ -87,7 +90,12 @@ const NannyCard = ({ data }) => {
           </InfoBox>
           <InfoBox>
             <InfoText>
-              Characters: <TextHighlight>{data.characters.map(item => item.replace(item[0], item[0].toUpperCase())).join(", ")}</TextHighlight>
+              Characters:{" "}
+              <TextHighlight>
+                {data.characters
+                  .map((item) => item.replace(item[0], item[0].toUpperCase()))
+                  .join(", ")}
+              </TextHighlight>
             </InfoText>
           </InfoBox>
           <InfoBox>
@@ -99,53 +107,21 @@ const NannyCard = ({ data }) => {
         <DescriptionText>{data.about}</DescriptionText>
         {isOpenAllInfo ? (
           <>
-            <ReviewsBox>
-              <ReviewCard>
-                <TitleBlockReviewCard>
-                  <ImgLetter>N</ImgLetter>
-                  <NameReviewBox>
-                    <NameText>Name</NameText>
-                    <RatingText>
-                      <svg width="16" height="16">
-                        <use href={sprite + "#icon-star"} />
-                      </svg>
-                      4.5
-                    </RatingText>
-                  </NameReviewBox>
-                </TitleBlockReviewCard>
-                <ReviewDescriptionText>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis
-                  eveniet consequuntur beatae quasi, delectus voluptatem
-                  molestias facere sapiente unde natus quod libero possimus
-                  illum pariatur saepe iure aperiam vitae eligendi!
-                </ReviewDescriptionText>
-              </ReviewCard>
-              <ReviewCard>
-                <TitleBlockReviewCard>
-                  <ImgLetter>N</ImgLetter>
-                  <NameReviewBox>
-                    <NameText>Name</NameText>
-                    <RatingText>
-                      <svg width="16" height="16">
-                        <use href={sprite + "#icon-star"} />
-                      </svg>
-                      4.5
-                    </RatingText>
-                  </NameReviewBox>
-                </TitleBlockReviewCard>
-                <ReviewDescriptionText>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis
-                  eveniet consequuntur beatae quasi, delectus voluptatem
-                  molestias facere sapiente unde natus quod libero possimus
-                  illum pariatur saepe iure aperiam vitae eligendi!
-                </ReviewDescriptionText>
-              </ReviewCard>
-            </ReviewsBox>
+            {data.reviews && (
+              <ReviewsBox>
+                {data.reviews.map((review) => (
+                  <ReviewCard key={review.reviewer} data={review} />
+                ))}
+              </ReviewsBox>
+            )}
+
             <Button type="button" onClick={() => setIsOpenModal(true)}>
               Make an appointment
             </Button>
             {isOpenModal && (
               <AppointmentModal
+                imgURL={data.avatar_url}
+                name={data.name}
                 open={isOpenModal}
                 onClose={() => setIsOpenModal(false)}
               />
@@ -179,7 +155,8 @@ const NannyCard = ({ data }) => {
           Price / 1 hour:{" "}
           <StyledPriceSpan>{data.price_per_hour}$</StyledPriceSpan>
         </AdditionalInfoItem>
-        <StyledFavButton>
+        {/* <StyledFavButton onClick={() => alert("You will be able to choose this nanny to your favorite list when you will be authorized. Please register or login")}> */}
+        <StyledFavButton onClick={() => dispatch(addToTheFavorite(data))}>
           <svg width="26" height="26">
             <use href={sprite + "#icon-Property-1Normal"} />
           </svg>
