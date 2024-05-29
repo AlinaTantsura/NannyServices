@@ -3,8 +3,8 @@ import ReactDOM from "react-dom";
 import { BackdropStyled, CloseBtn, ModalStyled } from "./ModalWindow.styled";
 import { useEffect } from "react";
 
-// eslint-disable-next-line react/prop-types
-const ModalWindow = ({ open, children, onClose }) => {
+// eslint-disable-next-line react/prop-types, no-unused-vars
+const ModalWindow = ({ open, children, onClose, width }) => {
 
     useEffect(() => {
         const handleCloseModalByEsc = (e) => {
@@ -22,7 +22,7 @@ const ModalWindow = ({ open, children, onClose }) => {
     
   return ReactDOM.createPortal(
       <BackdropStyled onClick={onClose}>
-          <ModalStyled onClick={(e) => e.stopPropagation()}>
+          <ModalStyled onClick={(e) => e.stopPropagation()} width={width}>
               <CloseBtn onClick={onClose}>
                 <svg width="30" height="30">
                     <use href={sprite + "#icon-x"} />

@@ -31,7 +31,6 @@ export const InputAppointmentBox = styled.div`
     flex-wrap: wrap;
     column-gap: 8px;
     row-gap: 16px;
-    margin-bottom: 40px;
 
 `;
 
@@ -43,9 +42,13 @@ export const InputWrapBox = styled.div`
    }
 `;
 
-// export const InputStyledTime = styled(InputStyled)`
-//     position: relative;
-// `;
+export const IconClock = styled.svg`
+  position: absolute;
+  right: 18px;
+  top: 50%;
+  pointer-events: none;
+  transform: translateY(-50%);
+`;
 
 export const TimeListStyledBox = styled.div`
     position: absolute;
@@ -82,3 +85,18 @@ export const TimeListStyled = styled.ul`
     };
 `;
 
+export const TextAreaStyled = styled.textarea`
+    border: 1px solid rgba(17, 16, 28, 0.1);
+border-radius: 12px;
+padding: 16px 18px;
+height: 116px;
+outline: none;
+    font-family: var(--font-family-400);
+line-height: 125%;
+color: var(--text-black);
+    &::placeholder{
+        font-family: var(--font-family-400);
+line-height: 125%;
+color: var(--text-black);
+    }
+`;

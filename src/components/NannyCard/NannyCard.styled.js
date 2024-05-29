@@ -11,8 +11,10 @@ export const CardBox = styled.div`
 `;
 
 export const ImgBox = styled.div`
+position: relative;
   width: 120px;
   height: 120px;
+  padding: 12px;
   border: 2px solid rgba(9, 87, 195, 0.2);
   border-radius: 30px;
   display: flex;
@@ -26,6 +28,27 @@ export const PhotoOfNanny = styled.img`
   height: 96px;
   background-color: #e0e0e0;
   border: none;
+`;
+
+export const GreenCircleBox = styled.div`
+position: absolute;
+top: 14px;
+right: 14px;
+transform: translateX(50%) translateY(-50%);
+width: 14px;
+height: 14px;
+  border-radius: 50%;
+  background-color: var(--main-white);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+export const GreenCircle = styled.div`
+width: 9px;
+height: 9px;
+  border-radius: 50%;
+  background-color: #38CD3E;
 `;
 
 export const TextProfession = styled.p`

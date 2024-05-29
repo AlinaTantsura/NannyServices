@@ -1,4 +1,4 @@
-import { createAsyncThunk, isRejectedWithValue } from "@reduxjs/toolkit";
+import { createAsyncThunk } from "@reduxjs/toolkit";
 import { auth } from "../../firebase/firebase";
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, updateProfile } from "firebase/auth";
 
@@ -32,7 +32,7 @@ export const logOutUser = createAsyncThunk(
     async (_, thunkAPI) => {
         try {
             await signOut(auth);
-            // return auth.currentUser;
+            
         } catch (error) {
             return thunkAPI.rejectWithValue(error.messsage);
         }

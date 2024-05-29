@@ -2,60 +2,73 @@ import { createSlice } from "@reduxjs/toolkit";
 import { logInUser, logOutUser, registerUser } from "./operations";
 
 const initialState = {
-  email: null,
-  token: null,
-  id: null,
-  name: null,
-    error: null,
-  isLogIn: false,
+  isLoading: false,
+  error: null,
+  user: {
+    email: null,
+    token: null,
+    id: null,
+    name: null,
+    isLogIn: false,
+  }
 };
 
 const userSlice = createSlice({
   name: "user",
   initialState,
   reducers: {
-    logoutUser(state) {
-      state.email = null;
-      state.token = null;
-      state.id = null;
-    },
+ 
   },
   extraReducers: (builder) => {
+    builder.addCase(registerUser.pending, (state) => {
+      state.isLoading = true;
+    })
     builder.addCase(registerUser.fulfilled, (state, action) => {
-      state.email = action.payload.email;
-      state.token = action.payload.accessToken;
-      state.id = action.payload.uid;
-      state.name = action.payload.displayName;
-        state.error = null;
-        state.isLogIn = true;
+      state.user.email = action.payload.email;
+      state.user.token = action.payload.accessToken;
+      state.user.id = action.payload.uid;
+      state.user.name = action.payload.displayName;
+      state.user.isLogIn = true;
+      state.error = null;
+      state.isLoading = false
     }),
       builder.addCase(registerUser.rejected, (state, action) => {
         state.error = action.payload;
-      });
-    builder.addCase(logInUser.fulfilled, (state, action) => {
-      state.email = action.payload.email;
-      state.token = action.payload.accessToken;
-      state.id = action.payload.uid;
-      state.name = action.payload.displayName;
+        state.isLoading = false;
+      }),
+      builder.addCase(logInUser.pending, (state) => {
+        state.isLoading = true;
+      }),
+      builder.addCase(logInUser.fulfilled, (state, action) => {
+      state.user.email = action.payload.email;
+      state.user.token = action.payload.accessToken;
+      state.user.id = action.payload.uid;
+      state.user.name = action.payload.displayName;
+      state.user.isLogIn = true;
         state.error = null;
-        state.isLogIn = true;
+        state.isLoading = false;
     }),
       builder.addCase(logInUser.rejected, (state, action) => {
         state.error = action.payload;
-      });
-    builder.addCase(logOutUser.fulfilled, (state, action) => {
-      state.email = null;
-      state.token = null;
-      state.id = null;
-      state.name = null;
+        state.isLoading = false;
+      }),
+      builder.addCase(logOutUser.pending, (state) => {
+        state.isLoading = true;
+      }),
+      builder.addCase(logOutUser.fulfilled, (state) => {
+        state.user.email = null;
+        state.user.token = null;
+        state.user.id = null;
+        state.user.name = null;
+        state.user.isLogIn = false;
         state.error = null;
-        state.isLogIn = false;
+        state.isLoading = false;
     }),
       builder.addCase(logOutUser.rejected, (state, action) => {
         state.error = action.payload;
+        state.isLoading = false;
       });
   },
 });
 
-export const { logoutUser } = userSlice.actions;
 export default userSlice.reducer;

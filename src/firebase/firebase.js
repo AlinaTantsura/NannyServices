@@ -1,7 +1,7 @@
 /* eslint-disable no-undef */
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
-import { get, getDatabase, ref } from "firebase/database";
+import { getDatabase } from "firebase/database";
 
 
 const firebaseConfig = {
@@ -21,13 +21,13 @@ const db = getDatabase(app);
 
 export { app, auth, db };
 
-const nanniesRef = ref(db, '/')
+// const nanniesRef = ref(db, '/')
 
-const fetchData = async () => {
-  get(nanniesRef).then((snapshot) => {
-    const nannies = snapshot.val();
-    console.log(nannies)
-  })
-};
+// const fetchData = async () => {
+//   get(nanniesRef).then((snapshot) => {
+//     const nannies = snapshot.val();
+//     console.log(nannies)
+//   })
+// };
 
-fetchData()
+// fetchData()

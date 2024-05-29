@@ -5,23 +5,26 @@ import {
   FormDescription,
   FormStyled,
   FormTitle,
+  InputsBox,
   InputStyled,
 } from "../LoginModal/LoginModal.styled";
-import ModalWindow from "../ModalWindow/ModalWindow";
 import {
   AddNameText,
+  IconClock,
   InputAppointmentBox,
   InputWrapBox,
   NameBlock,
   NannyInfoBox,
   PhotoOfNanny,
-  TimeListStyled,
-  TimeListStyledBox,
+  TextAreaStyled,
 } from "./AppointmentModal.styled";
 import Button from "../Button/Button";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useState } from "react";
+import ModalWindow from "../ModalWindow/ModalWindow";
+import sprite from "../images/sprite.svg";
+import TimeDropDown from "./TimeDropDown";
 
 const AppointmentFormValidateSchema = yup.object().shape({
   address: yup
@@ -55,6 +58,9 @@ const AppointmentFormValidateSchema = yup.object().shape({
     .min(2, "Comment must have at least 2 characters"),
 });
 
+const date = new Date();
+const timeNow = `${date.getHours()}:${date.getMinutes()}`
+
 const AppointmentModal = ({ open, onClose }) => {
   const {
     register,
@@ -63,14 +69,16 @@ const AppointmentModal = ({ open, onClose }) => {
     formState: { errors },
   } = useForm({ resolver: yupResolver(AppointmentFormValidateSchema) });
   const [isOpenTimeDrop, setIsOpenTimeDrop] = useState(false);
-  const [timeValue, setTimeValue] = useState("00:00");
+  const [timeValue, setTimeValue] = useState(timeNow);
+
+
 
   const handleSubmitForm = (data) => {
     console.log(data);
     reset();
     onClose(true);
   };
-
+  
   const handleTimeCheck = (e) => {
     if (e.target !== e.currentTarget) {
       setIsOpenTimeDrop(false);
@@ -79,7 +87,7 @@ const AppointmentModal = ({ open, onClose }) => {
   }
   console.log(errors);
   return (
-    <ModalWindow open={open} onClose={onClose}>
+    <ModalWindow open={open} onClose={onClose} width={"600px"}>
       <FormStyled onSubmit={handleSubmit(handleSubmitForm)}>
         <FormTitle>Make an appointment with a babysitter</FormTitle>
         <FormDescription>
@@ -94,6 +102,7 @@ const AppointmentModal = ({ open, onClose }) => {
             <p>Name</p>
           </NameBlock>
         </NannyInfoBox>
+        <InputsBox>
         <InputAppointmentBox>
           <InputWrapBox>
             <InputStyled
@@ -127,67 +136,19 @@ const AppointmentModal = ({ open, onClose }) => {
             )}
           </InputWrapBox>
           <InputWrapBox>
-            <InputStyled
-              onClick={() => setIsOpenTimeDrop(true)}
+              <InputStyled
+              onClick={() => setIsOpenTimeDrop(!isOpenTimeDrop)}
               type="text"
               {...register("time")}
               value={timeValue}
-            />
+              />
+              <IconClock width={20} height={20}>
+                <use href={sprite + "#icon-clock"} />
+            </IconClock>
             {errors.time && <ErrorMessage>{errors.time?.message}</ErrorMessage>}
-            {isOpenTimeDrop && (<TimeListStyledBox>
-              <h3>Meeting time</h3>
-              <TimeListStyled onClick={handleTimeCheck}>
-                <li>00 : 00</li>
-                <li>00 : 30</li>
-                <li>01 : 00</li>
-                <li>01 : 30</li>
-                <li>02 : 00</li>
-                <li>02 : 30</li>
-                <li>03 : 00</li>
-                <li>03 : 30</li>
-                <li>04 : 00</li>
-                <li>04 : 30</li>
-                <li>05 : 00</li>
-                <li>05 : 30</li>
-                <li>06 : 00</li>
-                <li>06 : 30</li>
-                <li>07 : 00</li>
-                <li>07 : 30</li>
-                <li>08 : 00</li>
-                <li>08 : 30</li>
-                <li>09 : 00</li>
-                <li>09 : 30</li>
-                <li>10 : 00</li>
-                <li>10 : 30</li>
-                <li>11 : 00</li>
-                <li>11 : 30</li>
-                <li>12 : 00</li>
-                <li>12 : 30</li>
-                <li>13 : 00</li>
-                <li>13 : 30</li>
-                <li>14 : 00</li>
-                <li>14 : 30</li>
-                <li>15 : 00</li>
-                <li>15 : 30</li>
-                <li>16 : 00</li>
-                <li>16 : 30</li>
-                <li>17 : 00</li>
-                <li>17 : 30</li>
-                <li>18 : 00</li>
-                <li>18 : 30</li>
-                <li>19 : 00</li>
-                <li>19 : 30</li>
-                <li>20 : 00</li>
-                <li>20 : 30</li>
-                <li>21 : 00</li>
-                <li>21 : 30</li>
-                <li>22 : 00</li>
-                <li>22 : 30</li>
-                <li>23 : 00</li>
-                <li>23 : 30</li>
-              </TimeListStyled>
-            </TimeListStyledBox>)}
+              <TimeDropDown isOpen={isOpenTimeDrop} handleTimeCheck={handleTimeCheck} />
           </InputWrapBox>
+          </InputAppointmentBox>
           <InputStyled
             type="email"
             {...register("email")}
@@ -200,15 +161,16 @@ const AppointmentModal = ({ open, onClose }) => {
             placeholder="Father's or mother's name"
           />
           <ErrorMessage>{errors.name?.message}</ErrorMessage>
-          <InputStyled
+          <TextAreaStyled
             type="textarea"
+            rows="3"
             {...register("comment")}
             placeholder="Comment"
           />
           <ErrorMessage>{errors.comment?.message}</ErrorMessage>
-        </InputAppointmentBox>
+        </InputsBox>
         <Button>Send</Button>
-      </FormStyled>
+        </FormStyled>
     </ModalWindow>
   );
 };
