@@ -4,13 +4,12 @@ import NannyCard from "../NannyCard/NannyCard";
 import { NanniesListContainer, NanniesListStyled } from "./NanniesList.styled";
 import { getNanniesData } from "../../redux-toolkit/fetchNaniesData/operations";
 import { useDispatch, useSelector } from "react-redux";
-import { selectData, selectFavoriteList } from "../../redux-toolkit/fetchNaniesData/selectors";
+import { selectData} from "../../redux-toolkit/fetchNaniesData/selectors";
 
 const NanniesList = () => {
   const data = useSelector(selectData);
   const dispatch = useDispatch();
-  const favList = useSelector(selectFavoriteList);
-  console.log(favList)
+  
 
   useEffect(() => {
     const fetchData = () => {
@@ -19,19 +18,20 @@ const NanniesList = () => {
     fetchData()
   }, [dispatch])
 
-  console.log(data)
   return (
     data && (
-    <NanniesListContainer>
-      <NanniesListStyled>
-        {data && data?.map(nannyData => (
-          <li key={nannyData.name}>
-            <NannyCard data={nannyData} />
-          </li>
-        ))}
-      </NanniesListStyled>
-      <Button type="button">Load more...</Button>
-    </NanniesListContainer>)
+      <NanniesListContainer>
+        <NanniesListStyled>
+          {data && data?.map(nannyData => (
+            <li key={nannyData.name}>
+              <NannyCard data={nannyData} />
+            </li>
+          )
+          )}
+        </NanniesListStyled>
+        <Button type="button">Load more...</Button>
+      </NanniesListContainer>)
+     
   );
 };
 

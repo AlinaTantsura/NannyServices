@@ -25,19 +25,12 @@ import {
 } from "./NannyCard.styled";
 import AppointmentModal from "../AppointmentModal/AppointmentModal";
 import ReviewCard from "./ReviewCard";
-import { addToTheFavorite } from "../../redux-toolkit/fetchNaniesData/nanniesSlice";
-import { useDispatch } from "react-redux";
-// import { useSelector } from "react-redux";
-// import { selectIsLogIn } from "../../redux-toolkit/user/selectors";
+import { useDispatch, useSelector } from "react-redux";
+import { selectFavoriteList } from "../../redux-toolkit/filter/selectors";
+import { addToTheFavorite, removeFromTheFavorite } from "../../redux-toolkit/filter/filterSlice";
+import { selectIsLogIn } from "../../redux-toolkit/user/selectors";
 
-// eslint-disable-next-line react/prop-types
-const NannyCard = ({ data }) => {
-  const [isOpenAllInfo, setIsOpenAllInfo] = useState(false);
-  const [isOpenModal, setIsOpenModal] = useState(false);
-  const dispatch = useDispatch();
-  // const isLogin = useSelector(selectIsLogIn);
-
-  const countAge = (birthdayData) => {
+const countAge = (birthdayData) => {
     const today = new Date();
     const todayYear = today.getFullYear();
     const todayMonth = today.getMonth() + 1;
@@ -55,6 +48,22 @@ const NannyCard = ({ data }) => {
     }
     return age;
   };
+
+// eslint-disable-next-line react/prop-types
+const NannyCard = ({ data}) => {
+  const [isOpenAllInfo, setIsOpenAllInfo] = useState(false);
+  const [isOpenModal, setIsOpenModal] = useState(false);
+  const dispatch = useDispatch();
+  const isLogin = useSelector(selectIsLogIn);
+  const favList = useSelector(selectFavoriteList);
+
+  
+
+  const handleFavoriteProperty = (data) => {
+    if (!isLogin) return alert("You will be able to choose this nanny to your favorite list when you will be authorized. Please register or login");
+    if(favList?.find(item => item.name === data.name)) return dispatch(removeFromTheFavorite(data.name))
+    return dispatch(addToTheFavorite(data))
+  }
 
   return (
     <CardBox>
@@ -156,9 +165,11 @@ const NannyCard = ({ data }) => {
           <StyledPriceSpan>{data.price_per_hour}$</StyledPriceSpan>
         </AdditionalInfoItem>
         {/* <StyledFavButton onClick={() => alert("You will be able to choose this nanny to your favorite list when you will be authorized. Please register or login")}> */}
-        <StyledFavButton onClick={() => dispatch(addToTheFavorite(data))}>
+        <StyledFavButton onClick={() => handleFavoriteProperty(data)}>
           <svg width="26" height="26">
-            <use href={sprite + "#icon-Property-1Normal"} />
+            <use href={!favList.find(item => item.name === data.name)
+              ? sprite + "#icon-Property-1Normal"
+              : sprite + "#icon-Property-1Hover" } />
           </svg>
         </StyledFavButton>
       </AdditionalInfoBox>

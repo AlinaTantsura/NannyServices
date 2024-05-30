@@ -1,4 +1,4 @@
-import NanniesList from "../components/NanniesList/NanniesList"
+import NanniesFavoriteList from "../components/NanniesFavoriteList/NanniesFavoriteList"
 import SelectCategoriesForm from "../components/SelectCategoriesForm/SelectCategoriesForm"
 import { MainContainer } from "./Container.styled"
 
@@ -6,7 +6,7 @@ const FavoritesPage = () => {
   return (
     <MainContainer>
       <SelectCategoriesForm />
-      <NanniesList />
+      <NanniesFavoriteList />
     </MainContainer>
   )
 }
