@@ -7,10 +7,14 @@ import {
 } from "./SelectCategoriesForm.styled";
 import sprite from "../images/sprite.svg";
 import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { changeFilterOption } from "../../redux-toolkit/filter/filterSlice";
+import { selectFilter } from "../../redux-toolkit/filter/selectors";
 
 const SelectCategoriesForm = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [checkedOption, setCheckedOption] = useState("A to Z");
+  const dispatch = useDispatch();
+  const checkedOption = useSelector(selectFilter);
 
   const handleOpenSelect = () => {
     if (isOpen) return setIsOpen(false);
@@ -18,7 +22,7 @@ const SelectCategoriesForm = () => {
   };
 
   const handleCheckedOption = (e) => {
-    setCheckedOption(e.target.innerText);
+    dispatch(changeFilterOption(e.target.innerText));
     setIsOpen(false);
   };
 

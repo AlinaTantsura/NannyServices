@@ -1,37 +1,67 @@
-import { useSelector } from "react-redux";
-import Button from "../Button/Button"
-import { NanniesListContainer, NanniesListStyled } from "../NanniesList/NanniesList.styled"
-import NannyCard from "../NannyCard/NannyCard"
-import { selectFavoriteList, selectFilter  } from "../../redux-toolkit/filter/selectors";
-import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  LoadMoreBtn,
+  NanniesListContainer,
+  NanniesListStyled,
+} from "../NanniesList/NanniesList.styled";
+import NannyCard from "../NannyCard/NannyCard";
+import { selectFavoriteList, selectFilter, selectFilteredListAll } from "../../redux-toolkit/filter/selectors";
+import { useEffect, useState } from "react";
+import { filterData } from "../../redux-toolkit/filter/filterSlice";
 
 const NanniesFavoriteList = () => {
-    const favList = useSelector(selectFavoriteList);
-    const filterOption = useSelector(selectFilter);
-    const [filteredItems] = useState(favList);
-    console.log(favList)
-    console.log(filterOption)
-    // if(filterOption === "A to Z") setFilteredItems(favList.sort((a, b) => a.name.localeCompare(b.name)))
-    
+  const favList = useSelector(selectFavoriteList);
+   const filtredOption = useSelector(selectFilter)
+  const filteredList = useSelector(selectFilteredListAll)
+  const [isLoadMore, setisLoadMore] = useState(false);
+  const [nextIndex, setNextIndex] = useState(3);
+  const dispatch = useDispatch();
 
-    return (
-      favList.length > 0 ? (
-        <NanniesListContainer>
-        <NanniesListStyled>
-          {filteredItems.map(nannyData => (
-            <li key={nannyData.name}>
-              <NannyCard data={nannyData} />
-            </li>
-          ))}
-        </NanniesListStyled>
-          {favList.length > 3 && <Button type="button">Load more...</Button>}
-        </NanniesListContainer>
-      )
-        : (
-          <p>There are no favorites. Please, choose one from the list</p>
-        )
+  useEffect(() => {
+    if (
+      !filteredList ||
+      filteredList.length < 4 ||
+      filteredList.length <= nextIndex
+    ) {
+      setisLoadMore(false);
+    } else {
+      setisLoadMore(true);
+    }
 
-  )
-}
+  }, [filteredList, nextIndex]);
 
-export default NanniesFavoriteList
+  useEffect(() => {
+    if(favList) dispatch(filterData(favList))
+  }, [dispatch, favList, filtredOption]);
+
+  const handleLoadMore = () => {
+    if (filteredList.length >= nextIndex) {
+      setisLoadMore(true);
+      setNextIndex(nextIndex + 3);
+    }
+  };
+
+  return filteredList && filteredList.length > 0 ? (
+    <NanniesListContainer>
+      <NanniesListStyled>
+        {filteredList.slice(0, nextIndex).map((nannyData) => (
+          <li key={nannyData.name}>
+            <NannyCard data={nannyData} />
+          </li>
+        ))}
+      </NanniesListStyled>
+      {isLoadMore && (
+        <LoadMoreBtn type="button" onClick={handleLoadMore}>
+          Load more...
+        </LoadMoreBtn>
+      )}
+    </NanniesListContainer>
+  ) : (
+    <p>
+      There are no favorites. Please, choose one from the list or change filter
+      option
+    </p>
+  );
+};
+
+export default NanniesFavoriteList;

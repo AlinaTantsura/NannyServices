@@ -7,7 +7,6 @@ const nanniesSlice = createSlice({
         isLoading: false,
         error: null,
         data: null,
-        favoriteList: [],
     },
     extraReducers: (builder) => {
         builder.addCase(getNanniesData.pending, (state) => {
