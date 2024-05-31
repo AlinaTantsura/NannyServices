@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  filterOption: "A to Z",
+  filterOption: "Show all",
   favoriteList: [],
   filteredAllData: [],
 };
@@ -12,7 +12,7 @@ const filterSlice = createSlice({
     changeFilterOption(state, action) {
       state.filterOption = action.payload;
     },
-    filterData(state, action) {
+      filterData(state, action) {
       if (state.filterOption === "A to Z") {
           state.filteredAllData = [...action.payload];
         state.filteredAllData.sort(({ name: a }, { name: b }) =>

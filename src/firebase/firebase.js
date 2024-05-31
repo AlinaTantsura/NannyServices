@@ -20,14 +20,3 @@ const auth = getAuth(app);
 const db = getDatabase(app);
 
 export { app, auth, db };
-
-// const nanniesRef = ref(db, '/')
-
-// const fetchData = async () => {
-//   get(nanniesRef).then((snapshot) => {
-//     const nannies = snapshot.val();
-//     console.log(nannies)
-//   })
-// };
-
-// fetchData()
