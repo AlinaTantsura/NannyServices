@@ -13,7 +13,7 @@ const HomePage = () => {
   // if (isLogIn) navigate("/nannies");
   useEffect(() => {
     if (isLogIn) navigate("/nannies");
-  }, [isLogIn])
+  }, [isLogIn, navigate])
 
   return (
     <main>

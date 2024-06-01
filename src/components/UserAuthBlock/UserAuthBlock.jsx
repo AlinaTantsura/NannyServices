@@ -14,7 +14,7 @@ import RegisterModal from "../RegisterModal/RegisterModal";
 import { useDispatch, useSelector } from "react-redux";
 import { selectIsLogIn, selectName } from "../../redux-toolkit/user/selectors";
 import { logOutUser } from "../../redux-toolkit/user/operations";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const UserAuthBlock = () => {
   const [isOpenLoginModal, setIsOpenLoginModal] = useState(false);
@@ -24,12 +24,11 @@ const UserAuthBlock = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  //  useEffect(() => {
-  //   if (!isLogIn) navigate("/");
-  // }, [isLogIn])
 
   const handleLogOut = () => {
+    navigate("/");
     dispatch(logOutUser());
+    
   }
   return isLogIn ? (
     <UserBlock>

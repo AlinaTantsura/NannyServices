@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Button from "../Button/Button";
 import sprite from "../images/sprite.svg";
 import {
@@ -27,7 +27,7 @@ import AppointmentModal from "../AppointmentModal/AppointmentModal";
 import ReviewCard from "./ReviewCard";
 import { useDispatch, useSelector } from "react-redux";
 import { selectFavoriteList } from "../../redux-toolkit/filter/selectors";
-import { addToTheFavorite, removeFromTheFavorite } from "../../redux-toolkit/filter/filterSlice";
+import { addToTheFavorite, clearFavoriteList, removeFromTheFavorite } from "../../redux-toolkit/filter/filterSlice";
 import { selectIsLogIn } from "../../redux-toolkit/user/selectors";
 
 const countAge = (birthdayData) => {
@@ -57,7 +57,9 @@ const NannyCard = ({ data}) => {
   const isLogin = useSelector(selectIsLogIn);
   const favList = useSelector(selectFavoriteList);
 
-  
+  useEffect(() => {
+    if(!isLogin) dispatch(clearFavoriteList())
+  }, [isLogin, dispatch])
 
   const handleFavoriteProperty = (data) => {
     if (!isLogin) return alert("You will be able to choose this nanny to your favorite list when you will be authorized. Please register or login");
@@ -164,7 +166,6 @@ const NannyCard = ({ data}) => {
           Price / 1 hour:{" "}
           <StyledPriceSpan>{data.price_per_hour}$</StyledPriceSpan>
         </AdditionalInfoItem>
-        {/* <StyledFavButton onClick={() => alert("You will be able to choose this nanny to your favorite list when you will be authorized. Please register or login")}> */}
         <StyledFavButton onClick={() => handleFavoriteProperty(data)}>
           <svg width="26" height="26">
             <use href={!favList.find(item => item.name === data.name)

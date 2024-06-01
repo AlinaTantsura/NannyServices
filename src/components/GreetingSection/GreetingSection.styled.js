@@ -24,6 +24,7 @@ export const AddInfoParag = styled.p`
 `;
 
 export const GetStartedButton = styled(ButtonStyled)`
+position: relative;
   margin-top: 64px;
   border: solid 1px rgba(251, 251, 251, 0.4);
   padding: 18px 50px;
@@ -32,4 +33,11 @@ export const GetStartedButton = styled(ButtonStyled)`
   letter-spacing: -0.01em;
   display: flex;
   gap: 18px;
+  align-items: center
 `;
+
+// export const ArrowSvg = styled.svg`
+//   position: absolute;
+//   top: 0;
+//   right: 0;
+// `;

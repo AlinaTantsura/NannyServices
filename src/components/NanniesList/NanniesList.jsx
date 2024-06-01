@@ -28,6 +28,7 @@ const NanniesList = () => {
   const filteredData = useSelector(selectFilteredListAll);
   const filtredOption = useSelector(selectFilter);
   const lastIndex = useSelector(selectLastIndex);
+ 
 
   useEffect(() => {
     dispatch(getLastData());

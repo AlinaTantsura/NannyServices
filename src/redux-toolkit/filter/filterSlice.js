@@ -54,6 +54,9 @@ const filterSlice = createSlice({
         (fav) => fav.name !== action.payload
       );
     },
+    clearFavoriteList(state) {
+      state.favoriteList = [];
+    }
   },
 });
 
@@ -62,5 +65,6 @@ export const {
   removeFromTheFavorite,
   changeFilterOption,
   filterData,
+  clearFavoriteList
 } = filterSlice.actions;
 export default filterSlice.reducer;

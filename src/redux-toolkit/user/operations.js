@@ -20,7 +20,6 @@ export const logInUser = createAsyncThunk(
     async ({ email, password }, thunkAPI) => {
         try {
           await signInWithEmailAndPassword(auth, email, password);
-            console.log(auth.currentUser)
             return auth.currentUser;
         } catch (error) {
             return thunkAPI.rejectWithValue(error.messsage);

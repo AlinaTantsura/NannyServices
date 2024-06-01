@@ -5,19 +5,26 @@ import {
   MainTitle,
 } from "./GreetingSection.styled";
 import sprite from "../images/sprite.svg";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const GreetingSection = () => {
+  const [isHoverIcon, setIsHoverIcon] = useState(false);
+  const navigate = useNavigate();
+
+  const handleHoverIcon = () => {
+    setIsHoverIcon(!isHoverIcon)
+  }
   return (
     <GreetingSectionStyled>
       <MainTitle>Make Life Easier for the Family:</MainTitle>
       <AddInfoParag>Find Babysitters Online for All Occasions</AddInfoParag>
-      <GetStartedButton>
+      <GetStartedButton onMouseEnter={handleHoverIcon} onMouseLeave={handleHoverIcon} onClick={() => navigate('/nannies')}>
               Get started
-              <div>
                   <svg width="15" height="17">
-          <use href={sprite + "#icon-Arrow-16"} />
+          <use href={isHoverIcon ? sprite + "#icon-Arrow-16-1" : sprite + "#icon-Arrow-16" } />
         </svg>
-              </div>
+             
         
       </GetStartedButton>
     </GreetingSectionStyled>
