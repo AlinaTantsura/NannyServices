@@ -33,11 +33,9 @@ position: relative;
   letter-spacing: -0.01em;
   display: flex;
   gap: 18px;
-  align-items: center
+  align-items: center;
+  &:hover svg{
+    transition: all 0.4s easy-in;
+    transform: rotate(55deg);
+  }
 `;
-
-// export const ArrowSvg = styled.svg`
-//   position: absolute;
-//   top: 0;
-//   right: 0;
-// `;

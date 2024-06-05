@@ -5,6 +5,7 @@ export const NavigationList = styled.nav`
   display: flex;
   gap: 40px;
   align-items: flex-start;
+  /* margin: ${props => props.$isHome ? "0 6.68604% 0 35.39244%" : "0 15.069% 0 21.18%" }; */
   .active-link::after {
     content: "";
     margin-top: 4px;

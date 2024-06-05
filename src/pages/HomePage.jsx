@@ -21,7 +21,7 @@ const HomePage = () => {
         <GreetingSection />
         <MainPictureSection />
       </Container>
-    </main>
+      </main>
   )
 }
 

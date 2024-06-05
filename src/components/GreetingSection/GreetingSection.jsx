@@ -22,7 +22,8 @@ const GreetingSection = () => {
       <GetStartedButton onMouseEnter={handleHoverIcon} onMouseLeave={handleHoverIcon} onClick={() => navigate('/nannies')}>
               Get started
                   <svg width="15" height="17">
-          <use href={isHoverIcon ? sprite + "#icon-Arrow-16-1" : sprite + "#icon-Arrow-16" } />
+          {/* <use href={isHoverIcon ? sprite + "#icon-Arrow-16-1" : sprite + "#icon-Arrow-16" } /> */}
+          <use href={sprite + "#icon-Arrow-16" } />
         </svg>
              
         

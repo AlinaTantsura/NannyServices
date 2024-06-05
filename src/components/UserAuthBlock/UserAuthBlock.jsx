@@ -8,13 +8,13 @@ import {
 } from "./UserAuthBlock.styled";
 import sprite from "../images/sprite.svg";
 import { useState } from "react";
-import Button from "../Button/Button";
 import LoginModal from "../LoginModal/LoginModal";
 import RegisterModal from "../RegisterModal/RegisterModal";
 import { useDispatch, useSelector } from "react-redux";
 import { selectIsLogIn, selectName } from "../../redux-toolkit/user/selectors";
 import { logOutUser } from "../../redux-toolkit/user/operations";
 import { useNavigate } from "react-router-dom";
+import { ButtonStyled } from "../Button/Button.styled";
 
 const UserAuthBlock = () => {
   const [isOpenLoginModal, setIsOpenLoginModal] = useState(false);
@@ -49,7 +49,7 @@ const UserAuthBlock = () => {
         open={isOpenLoginModal}
         onClose={() => setIsOpenLoginModal(false)}
       />
-      <Button onClick={() => setIsOpenRegisterModal(true)}>Registration</Button>
+      <ButtonStyled onClick={() => setIsOpenRegisterModal(true)}>Registration</ButtonStyled>
       <RegisterModal
         open={isOpenRegisterModal}
         onClose={() => setIsOpenRegisterModal(false)}

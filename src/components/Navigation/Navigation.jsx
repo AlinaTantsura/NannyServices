@@ -11,11 +11,19 @@ const Navigation = () => {
  
 
   return (
+    isHome ? (
     <NavigationList>
+          <NavigationLink to="/">Home</NavigationLink>
+          <NavigationLink className={location.pathname === "/nannies" ? "active-link" : ""} to="/nannies">Nannies</NavigationLink>
+        </NavigationList>
+    ) : (
+        <NavigationList>
           <NavigationLink to="/">Home</NavigationLink>
           <NavigationLink className={location.pathname === "/nannies" ? "active-link" : ""} to="/nannies">Nannies</NavigationLink>
       {(!isHome && isLogin) && <NavigationLink className={location.pathname === "/favorites" ? "active-link" : ""} to="/favorites">Favorites</NavigationLink>}
         </NavigationList>
+    )
+    
   )
 }
 

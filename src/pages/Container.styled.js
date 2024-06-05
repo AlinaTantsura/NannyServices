@@ -1,10 +1,17 @@
 import styled from "styled-components";
 
+// export const MainHomepage = styled.main`
+//     position: relative;
+//     width: 100%;
+//     height: 100vh;
+// `;
+
 export const Container = styled.div`
     position: absolute;
-    top: 24px;
-    left: 24px;
-    width: 1376px;
+    top: 32px;
+    left: 32px;
+    max-width: 1376px;
+    width: calc(100% - 32px * 2);
     height: 736px;
     border-radius: 30px;
     background-color: var(--main-color);

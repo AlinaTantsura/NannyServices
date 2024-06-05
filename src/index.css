@@ -19,7 +19,7 @@
   --main-white: #FBFBFB;
   --text-black: #11101c;
   --text-gray: #8a8a89;
-  --transition: all 0.4s easy-in-out;
+  --transition: all 0.4s easy-in;
 }
 
 *{
@@ -35,6 +35,7 @@
 
 body{
   background-color: #F3F3F3;
+  
 }
 ul{
   list-style: none;
