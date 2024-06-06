@@ -17,7 +17,7 @@ const GreetingSection = () => {
   }
   return (
     <GreetingSectionStyled>
-      <MainTitle>Make Life Easier for the Family:</MainTitle>
+      <MainTitle onClick={()=>console.log("tittle")}>Make Life Easier for the Family:</MainTitle>
       <AddInfoParag>Find Babysitters Online for All Occasions</AddInfoParag>
       <GetStartedButton onMouseEnter={handleHoverIcon} onMouseLeave={handleHoverIcon} onClick={() => navigate('/nannies')}>
               Get started

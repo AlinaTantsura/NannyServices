@@ -16,10 +16,9 @@ export const BackdropStyled = styled.div`
 export const ModalStyled = styled.div`
   position: absolute;
   border-radius: 30px;
-  width: ${props => props.width || "565px" };
-  /* top: 30%;
-  left: 30%; */
+  max-width: ${props => props.width || "565px" };
   padding: 64px;
+  padding: 64px calc(20px + (64 - 20) * ((100% - 320px)/ (1440 - 320)));
   background-color: var(--main-white);
   z-index: 1000;
 `;

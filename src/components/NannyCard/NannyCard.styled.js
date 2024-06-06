@@ -2,11 +2,13 @@ import styled from "styled-components";
 
 export const CardBox = styled.div`
   border-radius: 24px;
-  width: 1184px;
+  /* max-width: 1184px; */
+  width: 100%;
   background-color: var(--main-white);
   padding: 24px;
   position: relative;
   display: flex;
+  flex-wrap: wrap;
   gap: 24px;
 `;
 
@@ -49,6 +51,10 @@ width: 9px;
 height: 9px;
   border-radius: 50%;
   background-color: #38CD3E;
+`;
+
+export const MainNannyInfo = styled.div`
+  max-width: 86.531%;
 `;
 
 export const TextProfession = styled.p`
@@ -104,7 +110,8 @@ export const StyledReadMoreButton = styled.button`
 export const AdditionalInfoBox = styled.div`
   position: absolute;
   top: 24px;
-  right: 24px;
+  right: 8.445%;
+  max-width: 35,726%;
   display: flex;
   gap: 16px;
   align-items: center;
@@ -130,11 +137,14 @@ export const StyledPriceSpan = styled.span`
 `;
 
 export const StyledFavButton = styled.button`
-  margin-left: 50px;
+  /* margin-left: 50px; */
+  position: absolute;
+  top: 24px;
+  right: 24px;
   border: none;
   background-color: transparent;
   cursor: pointer;
-  display: flex;
+  /* display: flex; */
 `;
 
 export const ReviewsBox = styled.ul`
@@ -145,7 +155,7 @@ export const ReviewsBox = styled.ul`
 `;
 
 export const ReviewCardStyled = styled.li`
-  width: 482px;
+  max-width: 482px;
 `;
 
 export const TitleBlockReviewCard = styled.div`

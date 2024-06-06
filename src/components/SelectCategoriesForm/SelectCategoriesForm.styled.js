@@ -32,7 +32,8 @@ export const SelectButtonStyled = styled(ButtonStyled)`
 `;
 
 export const OptionsList = styled.ul`
-  position: relative;
+  position: absolute;
+  top: 150px;
   border-radius: 14px;
   width: 226px;
   padding: 18px 0;

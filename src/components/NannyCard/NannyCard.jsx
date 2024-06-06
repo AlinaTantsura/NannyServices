@@ -22,6 +22,7 @@ import {
   ReviewsBox,
   GreenCircleBox,
   GreenCircle,
+  MainNannyInfo,
 } from "./NannyCard.styled";
 import AppointmentModal from "../AppointmentModal/AppointmentModal";
 import ReviewCard from "./ReviewCard";
@@ -75,7 +76,7 @@ const NannyCard = ({ data}) => {
           <GreenCircle />
         </GreenCircleBox>
       </ImgBox>
-      <div>
+      <MainNannyInfo>
         <div>
           <TextProfession>Nanny</TextProfession>
           <NannyName>{data.name}</NannyName>
@@ -146,7 +147,7 @@ const NannyCard = ({ data}) => {
             Read more
           </StyledReadMoreButton>
         )}
-      </div>
+      </MainNannyInfo>
       <AdditionalInfoBox>
         <AdditionalInfoItem>
           <svg width="16" height="16">
@@ -166,14 +167,15 @@ const NannyCard = ({ data}) => {
           Price / 1 hour:{" "}
           <StyledPriceSpan>{data.price_per_hour}$</StyledPriceSpan>
         </AdditionalInfoItem>
-        <StyledFavButton onClick={() => handleFavoriteProperty(data)}>
+        
+      </AdditionalInfoBox>
+      <StyledFavButton onClick={() => handleFavoriteProperty(data)}>
           <svg width="26" height="26">
             <use href={!favList.find(item => item.name === data.name)
               ? sprite + "#icon-Property-1Normal"
               : sprite + "#icon-Property-1Hover" } />
           </svg>
         </StyledFavButton>
-      </AdditionalInfoBox>
     </CardBox>
   );
 };
