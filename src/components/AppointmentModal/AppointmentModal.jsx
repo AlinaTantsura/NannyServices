@@ -83,7 +83,6 @@ const AppointmentModal = ({ imgURL, name, open, onClose }) => {
       return setTimeValue(e.target.innerText.replaceAll(" ", ""))
     }
   }
-  console.log(errors);
   return (
     <ModalWindow open={open} onClose={onClose} width={"600px"}>
       <FormStyled onSubmit={handleSubmit(handleSubmitForm)}>

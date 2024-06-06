@@ -10,12 +10,24 @@ const ModalWindow = ({ open, children, onClose, width }) => {
         const handleCloseModalByEsc = (e) => {
             if(e.key === "Escape") onClose(false)
         }
-        document.addEventListener("keyup", handleCloseModalByEsc)
+        document.addEventListener("keyup", handleCloseModalByEsc);
+//         
         return () => {
-            document.removeEventListener("keyup", handleCloseModalByEsc)
+            document.removeEventListener("keyup", handleCloseModalByEsc);
         }
     }, [onClose]);
 
+//     if (open) {
+//         document.body.style.position = 'fixed';
+//         document.body.style.top = `-${window.scrollY}px`;
+//     }
+//     else {
+// //         const scrollY = document.body.style.top;
+// document.body.style.position = '';
+// document.body.style.top = '';
+// //         window.scrollTo(0, parseInt(scrollY || '0') * -1);
+//         return null;
+//     }
     if (!open) return null
 
     

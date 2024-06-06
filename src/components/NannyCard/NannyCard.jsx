@@ -23,35 +23,40 @@ import {
   GreenCircleBox,
   GreenCircle,
   MainNannyInfo,
+  TitleBox,
 } from "./NannyCard.styled";
 import AppointmentModal from "../AppointmentModal/AppointmentModal";
 import ReviewCard from "./ReviewCard";
 import { useDispatch, useSelector } from "react-redux";
 import { selectFavoriteList } from "../../redux-toolkit/filter/selectors";
-import { addToTheFavorite, clearFavoriteList, removeFromTheFavorite } from "../../redux-toolkit/filter/filterSlice";
+import {
+  addToTheFavorite,
+  clearFavoriteList,
+  removeFromTheFavorite,
+} from "../../redux-toolkit/filter/filterSlice";
 import { selectIsLogIn } from "../../redux-toolkit/user/selectors";
 
 const countAge = (birthdayData) => {
-    const today = new Date();
-    const todayYear = today.getFullYear();
-    const todayMonth = today.getMonth() + 1;
-    const todayDate = today.getDate();
-    const birthday = new Date(birthdayData);
-    const birthdayYear = birthday.getFullYear();
-    const birthdayMonth = birthday.getMonth() + 1;
-    const birthdayDate = birthday.getDate();
-    let age;
-    if (todayMonth > birthdayMonth) age = todayYear - birthdayYear;
-    else if (todayMonth < birthdayMonth) age = todayYear - birthdayYear - 1;
-    else {
-      if (todayDate >= birthdayDate) age = todayYear - birthdayYear;
-      else age = todayYear - birthdayYear - 1;
-    }
-    return age;
-  };
+  const today = new Date();
+  const todayYear = today.getFullYear();
+  const todayMonth = today.getMonth() + 1;
+  const todayDate = today.getDate();
+  const birthday = new Date(birthdayData);
+  const birthdayYear = birthday.getFullYear();
+  const birthdayMonth = birthday.getMonth() + 1;
+  const birthdayDate = birthday.getDate();
+  let age;
+  if (todayMonth > birthdayMonth) age = todayYear - birthdayYear;
+  else if (todayMonth < birthdayMonth) age = todayYear - birthdayYear - 1;
+  else {
+    if (todayDate >= birthdayDate) age = todayYear - birthdayYear;
+    else age = todayYear - birthdayYear - 1;
+  }
+  return age;
+};
 
 // eslint-disable-next-line react/prop-types
-const NannyCard = ({ data}) => {
+const NannyCard = ({ data }) => {
   const [isOpenAllInfo, setIsOpenAllInfo] = useState(false);
   const [isOpenModal, setIsOpenModal] = useState(false);
   const dispatch = useDispatch();
@@ -59,28 +64,54 @@ const NannyCard = ({ data}) => {
   const favList = useSelector(selectFavoriteList);
 
   useEffect(() => {
-    if(!isLogin) dispatch(clearFavoriteList())
-  }, [isLogin, dispatch])
+    if (!isLogin) dispatch(clearFavoriteList());
+  }, [isLogin, dispatch]);
 
   const handleFavoriteProperty = (data) => {
-    if (!isLogin) return alert("You will be able to choose this nanny to your favorite list when you will be authorized. Please register or login");
-    if(favList?.find(item => item.name === data.name)) return dispatch(removeFromTheFavorite(data.name))
-    return dispatch(addToTheFavorite(data))
-  }
+    if (!isLogin)
+      return alert(
+        "You will be able to choose this nanny to your favorite list when you will be authorized. Please register or login"
+      );
+    if (favList?.find((item) => item.name === data.name))
+      return dispatch(removeFromTheFavorite(data.name));
+    return dispatch(addToTheFavorite(data));
+  };
 
   return (
     <CardBox>
       <ImgBox>
-        <PhotoOfNanny src={data.avatar_url} alt="Photo of nanny"/>
+        <PhotoOfNanny src={data.avatar_url} alt="Photo of nanny" />
         <GreenCircleBox>
           <GreenCircle />
         </GreenCircleBox>
       </ImgBox>
       <MainNannyInfo>
-        <div>
-          <TextProfession>Nanny</TextProfession>
-          <NannyName>{data.name}</NannyName>
-        </div>
+        <TitleBox>
+          <div>
+            <TextProfession>Nanny</TextProfession>
+            <NannyName>{data.name}</NannyName>
+          </div>
+          <AdditionalInfoBox>
+            <AdditionalInfoItem>
+              <svg width="16" height="16">
+                <use href={sprite + "#icon-map-pin"} />
+              </svg>
+              {data.location}
+            </AdditionalInfoItem>
+            <DelimiterLine />
+            <AdditionalInfoItem>
+              <svg width="16" height="16">
+                <use href={sprite + "#icon-star"} />
+              </svg>
+              Rating: {data.rating}
+            </AdditionalInfoItem>
+            <DelimiterLine />
+            <AdditionalInfoItem>
+              Price / 1 hour:{" "}
+              <StyledPriceSpan>{data.price_per_hour}$</StyledPriceSpan>
+            </AdditionalInfoItem>
+          </AdditionalInfoBox>
+        </TitleBox>
         <InfoBoxesContainer>
           <InfoBox>
             <InfoText>
@@ -148,34 +179,18 @@ const NannyCard = ({ data}) => {
           </StyledReadMoreButton>
         )}
       </MainNannyInfo>
-      <AdditionalInfoBox>
-        <AdditionalInfoItem>
-          <svg width="16" height="16">
-            <use href={sprite + "#icon-map-pin"} />
-          </svg>
-          {data.location}
-        </AdditionalInfoItem>
-        <DelimiterLine />
-        <AdditionalInfoItem>
-          <svg width="16" height="16">
-            <use href={sprite + "#icon-star"} />
-          </svg>
-          Rating: {data.rating}
-        </AdditionalInfoItem>
-        <DelimiterLine />
-        <AdditionalInfoItem>
-          Price / 1 hour:{" "}
-          <StyledPriceSpan>{data.price_per_hour}$</StyledPriceSpan>
-        </AdditionalInfoItem>
-        
-      </AdditionalInfoBox>
+
       <StyledFavButton onClick={() => handleFavoriteProperty(data)}>
-          <svg width="26" height="26">
-            <use href={!favList.find(item => item.name === data.name)
-              ? sprite + "#icon-Property-1Normal"
-              : sprite + "#icon-Property-1Hover" } />
-          </svg>
-        </StyledFavButton>
+        <svg width="26" height="26">
+          <use
+            href={
+              !favList.find((item) => item.name === data.name)
+                ? sprite + "#icon-Property-1Normal"
+                : sprite + "#icon-Property-1Hover"
+            }
+          />
+        </svg>
+      </StyledFavButton>
     </CardBox>
   );
 };

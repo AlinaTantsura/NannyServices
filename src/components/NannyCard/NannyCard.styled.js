@@ -57,6 +57,15 @@ export const MainNannyInfo = styled.div`
   max-width: 86.531%;
 `;
 
+export const TitleBox = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  column-gap: 28.992%;
+  row-gap: 24px;
+  margin-bottom: 24px;
+`;
+
 export const TextProfession = styled.p`
   line-height: 150%;
   color: var(--text-gray);
@@ -66,7 +75,6 @@ export const TextProfession = styled.p`
 export const NannyName = styled.h2`
   font-size: 24px;
   line-height: 100%;
-  margin-bottom: 24px;
 `;
 
 export const InfoBoxesContainer = styled.div`
@@ -108,12 +116,14 @@ export const StyledReadMoreButton = styled.button`
 `;
 
 export const AdditionalInfoBox = styled.div`
-  position: absolute;
+  /* position: absolute;
   top: 24px;
-  right: 8.445%;
-  max-width: 35,726%;
+  right: 8.445%; */
+  /* max-width: 35,726%; */
   display: flex;
-  gap: 16px;
+  flex-wrap: wrap;
+  column-gap: 16px;
+  row-gap: 8px;
   align-items: center;
 `;
 
