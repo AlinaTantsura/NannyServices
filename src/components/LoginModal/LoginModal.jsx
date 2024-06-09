@@ -16,8 +16,9 @@ import Button from "../Button/Button";
 import sprite from "../images/sprite.svg";
 import { useState } from "react";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useDispatch } from "react-redux";
+import { useDispatch} from "react-redux";
 import { logInUser } from "../../redux-toolkit/user/operations";
+import "react-toastify/dist/ReactToastify.css";
 
 const LoginFormValidateSchema = yup.object().shape({
   email: yup
@@ -31,6 +32,7 @@ const LoginFormValidateSchema = yup.object().shape({
 const LoginModal = ({ open, onClose }) => {
   const [isShownPass, setIsShownPass] = useState(false);
   const dispatch = useDispatch();
+  
   const {
     register,
     handleSubmit,
@@ -44,9 +46,15 @@ const LoginModal = ({ open, onClose }) => {
   };
   const handleSubmitLogin = (data) => {
     dispatch(logInUser(data));
+    // if (error) {
+    //   toast.error(error);
+    //   return 
+    // }
     reset();
     onClose(true);
+    
   };
+
   return (
     <ModalWindow open={open} onClose={onClose}>
       <FormStyled onSubmit={handleSubmit(handleSubmitLogin)}>

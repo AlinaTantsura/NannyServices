@@ -12,6 +12,7 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import {
   selectData,
+  selectIsLoading,
   selectLastIndex,
 } from "../../redux-toolkit/fetchNaniesData/selectors";
 import { filterData } from "../../redux-toolkit/filter/filterSlice";
@@ -19,6 +20,7 @@ import {
   selectFilter,
   selectFilteredListAll,
 } from "../../redux-toolkit/filter/selectors";
+import Loader from "../Loader/Loader";
 
 const NanniesList = () => {
   const [limit, setLimit] = useState(3);
@@ -28,6 +30,7 @@ const NanniesList = () => {
   const filteredData = useSelector(selectFilteredListAll);
   const filtredOption = useSelector(selectFilter);
   const lastIndex = useSelector(selectLastIndex);
+  const isLoad = useSelector(selectIsLoading)
  
 
   useEffect(() => {
@@ -57,8 +60,9 @@ const NanniesList = () => {
 
   // if (!filteredData) setisLoadMore(false);
   // console.log(filteredData)
+  if(isLoad) return (<Loader />)
   return (
-    filteredData && (
+    filteredData.length > 0 && (
       <NanniesListContainer>
         <NanniesListStyled>
           {filteredData &&
@@ -74,8 +78,11 @@ const NanniesList = () => {
           </LoadMoreBtn>
         )}
       </NanniesListContainer>
-    )
+    ) 
   );
+
+  
+    
 };
 
 export default NanniesList;

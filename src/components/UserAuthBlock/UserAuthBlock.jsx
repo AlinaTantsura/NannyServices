@@ -24,7 +24,6 @@ const UserAuthBlock = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-
   const handleLogOut = () => {
     navigate("/");
     dispatch(logOutUser());

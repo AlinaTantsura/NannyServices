@@ -61,9 +61,10 @@ export const TitleBox = styled.div`
   display: flex;
   flex-wrap: wrap;
   align-items: flex-start;
-  column-gap: 28.992%;
+  justify-content: space-between;
   row-gap: 24px;
   margin-bottom: 24px;
+  margin-right: 98px;
 `;
 
 export const TextProfession = styled.p`

@@ -2,18 +2,20 @@ import { useSelector } from "react-redux"
 import GreetingSection from "../components/GreetingSection/GreetingSection"
 import MainPictureSection from "../components/MainPictureSection/MainPictureSection"
 import { Container } from "./Container.styled"
-import { selectIsLogIn } from "../redux-toolkit/user/selectors"
+import { selectError, selectIsLogIn } from "../redux-toolkit/user/selectors"
 import { useNavigate } from "react-router-dom"
 import { useEffect } from "react"
+import { toast, ToastContainer } from "react-toastify"
 
 
 const HomePage = () => {
   const isLogIn = useSelector(selectIsLogIn);
   const navigate = useNavigate();
-  // if (isLogIn) navigate("/nannies");
+  const error = useSelector(selectError);
   useEffect(() => {
     if (isLogIn) navigate("/nannies");
-  }, [isLogIn, navigate])
+    if (error) toast.error(error);
+  }, [isLogIn, navigate, error])
 
   return (
     <main>
@@ -21,6 +23,7 @@ const HomePage = () => {
         <GreetingSection />
         <MainPictureSection />
       </Container>
+      <ToastContainer />
       </main>
   )
 }

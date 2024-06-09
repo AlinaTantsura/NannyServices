@@ -17,10 +17,12 @@ export const ModalStyled = styled.div`
   position: absolute;
   border-radius: 30px;
   max-width: ${props => props.width || "565px" };
-  padding: 64px;
   padding: 64px calc(20px + (64 - 20) * ((100% - 320px)/ (1440 - 320)));
   background-color: var(--main-white);
   z-index: 1000;
+  overflow: auto;
+      -ms-overflow-style: none;
+      scrollbar-width: none;
 `;
 
 export const CloseBtn = styled.button`

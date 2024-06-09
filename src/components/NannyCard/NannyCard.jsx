@@ -35,6 +35,8 @@ import {
   removeFromTheFavorite,
 } from "../../redux-toolkit/filter/filterSlice";
 import { selectIsLogIn } from "../../redux-toolkit/user/selectors";
+import { toast, ToastContainer} from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const countAge = (birthdayData) => {
   const today = new Date();
@@ -68,10 +70,9 @@ const NannyCard = ({ data }) => {
   }, [isLogin, dispatch]);
 
   const handleFavoriteProperty = (data) => {
-    if (!isLogin)
-      return alert(
-        "You will be able to choose this nanny to your favorite list when you will be authorized. Please register or login"
-      );
+    if (!isLogin){
+    return toast.warn("You will be able to choose this nanny to your favorite list when you will be authorized. Please register or login")
+    }
     if (favList?.find((item) => item.name === data.name))
       return dispatch(removeFromTheFavorite(data.name));
     return dispatch(addToTheFavorite(data));
@@ -191,7 +192,9 @@ const NannyCard = ({ data }) => {
           />
         </svg>
       </StyledFavButton>
+      <ToastContainer />
     </CardBox>
+    
   );
 };
 
