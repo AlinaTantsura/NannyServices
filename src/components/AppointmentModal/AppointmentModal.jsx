@@ -25,6 +25,7 @@ import { useState } from "react";
 import ModalWindow from "../ModalWindow/ModalWindow";
 import sprite from "../images/sprite.svg";
 import TimeDropDown from "./TimeDropDown";
+import { toast } from "react-toastify";
 
 const AppointmentFormValidateSchema = yup.object().shape({
   address: yup
@@ -59,7 +60,10 @@ const AppointmentFormValidateSchema = yup.object().shape({
 });
 
 const date = new Date();
-const timeNow = `${date.getHours()}:${date.getMinutes()}`
+
+const timeNow = `${
+  date.getHours() < 10 ? `0${date.getHours()}` : date.getHours()
+}:${date.getMinutes() < 10 ? `0${date.getMinutes()}` : date.getMinutes()}`;
 
 const AppointmentModal = ({ imgURL, name, open, onClose }) => {
   const {
@@ -71,18 +75,23 @@ const AppointmentModal = ({ imgURL, name, open, onClose }) => {
   const [isOpenTimeDrop, setIsOpenTimeDrop] = useState(false);
   const [timeValue, setTimeValue] = useState(timeNow);
 
+  const handleTimeCheck = (e) => {
+    if (e.target !== e.currentTarget) {
+      // setIsOpenTimeDrop(false);
+      setTimeValue(e.target.innerText.replaceAll(" ", ""));
+      return;
+    }
+  };
+
   const handleSubmitForm = (data) => {
-    console.log(data);
+    toast.info(
+      `Hello, ${data.name}. You appointment on ${data.time} was succesfully created`
+    );
+    console.log(data.time);
     reset();
     onClose(true);
   };
-  
-  const handleTimeCheck = (e) => {
-    if (e.target !== e.currentTarget) {
-      setIsOpenTimeDrop(false);
-      return setTimeValue(e.target.innerText.replaceAll(" ", ""))
-    }
-  }
+
   return (
     <ModalWindow open={open} onClose={onClose} width={"600px"}>
       <FormStyled onSubmit={handleSubmit(handleSubmitForm)}>
@@ -100,51 +109,56 @@ const AppointmentModal = ({ imgURL, name, open, onClose }) => {
           </NameBlock>
         </NannyInfoBox>
         <InputsBox>
-        <InputAppointmentBox>
-          <InputWrapBox>
-            <InputStyled
-              type="text"
-              {...register("address")}
-              placeholder="Address"
-            />
-            {errors.address && (
-              <ErrorMessage>{errors.address?.message}</ErrorMessage>
-            )}
-          </InputWrapBox>
-          <InputWrapBox>
-            <InputStyled
-              type="tel"
-              {...register("phone")}
-              placeholder="Phone"
-              defaultValue="+380"
-            />
-            {errors.phone && (
-              <ErrorMessage>{errors.phone?.message}</ErrorMessage>
-            )}
-          </InputWrapBox>
-          <InputWrapBox>
-            <InputStyled
-              type="text"
-              {...register("childAge")}
-              placeholder="Child's age"
-            />
-            {errors.childAge && (
-              <ErrorMessage>{errors.childAge?.message}</ErrorMessage>
-            )}
-          </InputWrapBox>
-          <InputWrapBox>
+          <InputAppointmentBox>
+            <InputWrapBox>
               <InputStyled
-              onClick={() => setIsOpenTimeDrop(!isOpenTimeDrop)}
-              type="text"
-              {...register("time")}
-              value={timeValue}
+                type="text"
+                {...register("address")}
+                placeholder="Address"
+              />
+              {errors.address && (
+                <ErrorMessage>{errors.address?.message}</ErrorMessage>
+              )}
+            </InputWrapBox>
+            <InputWrapBox>
+              <InputStyled
+                type="tel"
+                {...register("phone")}
+                placeholder="Phone"
+                defaultValue="+380"
+              />
+              {errors.phone && (
+                <ErrorMessage>{errors.phone?.message}</ErrorMessage>
+              )}
+            </InputWrapBox>
+            <InputWrapBox>
+              <InputStyled
+                type="text"
+                {...register("childAge")}
+                placeholder="Child's age"
+              />
+              {errors.childAge && (
+                <ErrorMessage>{errors.childAge?.message}</ErrorMessage>
+              )}
+            </InputWrapBox>
+            <InputWrapBox>
+              <InputStyled
+                onClick={() => setIsOpenTimeDrop(!isOpenTimeDrop)}
+                type="text"
+                {...register("time")}
+                value={timeValue}
               />
               <IconClock width={20} height={20}>
                 <use href={sprite + "#icon-clock"} />
-            </IconClock>
-            {errors.time && <ErrorMessage>{errors.time?.message}</ErrorMessage>}
-              <TimeDropDown isOpen={isOpenTimeDrop} handleTimeCheck={handleTimeCheck} />
-          </InputWrapBox>
+              </IconClock>
+              {errors.time && (
+                <ErrorMessage>{errors.time?.message}</ErrorMessage>
+              )}
+              <TimeDropDown
+                isOpen={isOpenTimeDrop}
+                handleTimeCheck={handleTimeCheck}
+              />
+            </InputWrapBox>
           </InputAppointmentBox>
           <InputStyled
             type="email"
@@ -167,7 +181,7 @@ const AppointmentModal = ({ imgURL, name, open, onClose }) => {
           <ErrorMessage>{errors.comment?.message}</ErrorMessage>
         </InputsBox>
         <Button>Send</Button>
-        </FormStyled>
+      </FormStyled>
     </ModalWindow>
   );
 };

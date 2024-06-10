@@ -46,14 +46,20 @@ const LoginModal = ({ open, onClose }) => {
   };
   const handleSubmitLogin = (data) => {
     dispatch(logInUser(data));
-    // if (error) {
-    //   toast.error(error);
-    //   return 
-    // }
     reset();
     onClose(true);
     
   };
+
+  if (open) {
+    document.body.style.height = "100vh";
+    document.body.style.overflowY = "hidden";
+
+    }
+  else {
+    document.body.style.height = "100%";
+    document.body.style.overflowY = "auto";
+    }
 
   return (
     <ModalWindow open={open} onClose={onClose}>

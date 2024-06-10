@@ -2,10 +2,11 @@ import { useSelector } from "react-redux"
 import GreetingSection from "../components/GreetingSection/GreetingSection"
 import MainPictureSection from "../components/MainPictureSection/MainPictureSection"
 import { Container } from "./Container.styled"
-import { selectError, selectIsLogIn } from "../redux-toolkit/user/selectors"
+import { selectIsLogIn } from "../redux-toolkit/user/selectors"
 import { useNavigate } from "react-router-dom"
 import { useEffect } from "react"
 import { toast, ToastContainer } from "react-toastify"
+import { selectError } from "../redux-toolkit/requestSlice/selectors"
 
 
 const HomePage = () => {

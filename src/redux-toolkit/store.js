@@ -12,12 +12,14 @@ import {
 import storage from 'redux-persist/lib/storage'; 
 import userReducer from "./user/userSlice.js";
 import nanniesReducer from "./fetchNaniesData/nanniesSlice.js";
-import filterReducer from "./filter/filterSlice.js"
+import filterReducer from "./filter/filterSlice.js";
+import requestSlice from "./requestSlice/requestSlice.js";
 
 const rootReducer = combineReducers({
-    user: userReducer,
+  user: userReducer,
   nannies: nanniesReducer,
-    filter: filterReducer,
+  filter: filterReducer,
+    request: requestSlice,
 })
 const persistConfig = {
   key: 'root',

@@ -12,7 +12,6 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import {
   selectData,
-  selectIsLoading,
   selectLastIndex,
 } from "../../redux-toolkit/fetchNaniesData/selectors";
 import { filterData } from "../../redux-toolkit/filter/filterSlice";
@@ -21,6 +20,7 @@ import {
   selectFilteredListAll,
 } from "../../redux-toolkit/filter/selectors";
 import Loader from "../Loader/Loader";
+import { selectIsLoading } from "../../redux-toolkit/requestSlice/selectors";
 
 const NanniesList = () => {
   const [limit, setLimit] = useState(3);

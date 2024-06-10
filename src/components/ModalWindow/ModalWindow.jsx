@@ -17,16 +17,7 @@ const ModalWindow = ({ open, children, onClose, width }) => {
         }
     }, [onClose]);
 
-    // if (open) {
-    //         document.body.style.overflow = "hidden"
-    // }
-    // else {
-    //     document.body.style.overflow = "";
-    //     return null;
-    // }
     if (!open) return null
-
-    
     
   return ReactDOM.createPortal(
       <BackdropStyled onClick={onClose}>

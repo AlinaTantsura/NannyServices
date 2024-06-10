@@ -13,7 +13,7 @@ export const ButtonStyled = styled.button`
     transition: all 0.4s ease-in;
     &:hover,
     &:focus{
-        border: solid 1px var(--main-white);
+        /* border: solid 1px var(--main-white); */
         box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
         background-color:  #084EAF;
     };

@@ -35,7 +35,7 @@ import {
   removeFromTheFavorite,
 } from "../../redux-toolkit/filter/filterSlice";
 import { selectIsLogIn } from "../../redux-toolkit/user/selectors";
-import { toast, ToastContainer} from "react-toastify";
+import { toast} from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const countAge = (birthdayData) => {
@@ -67,7 +67,14 @@ const NannyCard = ({ data }) => {
 
   useEffect(() => {
     if (!isLogin) dispatch(clearFavoriteList());
-  }, [isLogin, dispatch]);
+    if (isOpenModal) {
+    document.body.style.height = "100vh";
+    document.body.style.overflowY = "hidden";
+  } else {
+    document.body.style.height = "100%";
+        document.body.style.overflowY = "auto";
+  }
+  }, [isLogin, dispatch, isOpenModal]);
 
   const handleFavoriteProperty = (data) => {
     if (!isLogin){
@@ -192,7 +199,6 @@ const NannyCard = ({ data }) => {
           />
         </svg>
       </StyledFavButton>
-      <ToastContainer />
     </CardBox>
     
   );

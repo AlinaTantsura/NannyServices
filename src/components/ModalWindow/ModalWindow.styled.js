@@ -20,6 +20,7 @@ export const ModalStyled = styled.div`
   padding: 64px calc(20px + (64 - 20) * ((100% - 320px)/ (1440 - 320)));
   background-color: var(--main-white);
   z-index: 1000;
+      max-height: 100vh;
   overflow: auto;
       -ms-overflow-style: none;
       scrollbar-width: none;

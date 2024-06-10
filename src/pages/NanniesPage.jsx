@@ -3,8 +3,8 @@ import NanniesList from "../components/NanniesList/NanniesList"
 import SelectCategoriesForm from "../components/SelectCategoriesForm/SelectCategoriesForm"
 import { MainContainer } from "./Container.styled"
 import { useDispatch, useSelector } from "react-redux"
-import { selectError } from "../redux-toolkit/user/selectors"
 import { useEffect } from "react"
+import { selectError } from "../redux-toolkit/requestSlice/selectors"
 
 const NanniesPage = () => {
   const error = useSelector(selectError);

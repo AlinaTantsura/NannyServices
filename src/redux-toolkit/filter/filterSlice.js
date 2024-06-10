@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { logOutUser } from "../user/operations";
 
 const initialState = {
   filterOption: "Show all",
@@ -26,19 +27,24 @@ const filterSlice = createSlice({
       } else if (state.filterOption === "Less than 10$")
         state.filteredAllData = action.payload.filter(
           (favoriteItem) => favoriteItem.price_per_hour < 10
-        );
+        )
       else if (state.filterOption === "Greater than 10$")
         state.filteredAllData = action.payload.filter(
           (favoriteItem) => favoriteItem.price_per_hour >= 10
-        );
-      else if (state.filterOption === "Popular")
-        state.filteredAllData = action.payload.filter(
-          (favoriteItem) => favoriteItem.rating >= 4
-        );
+        )
+      else if (state.filterOption === "Popular"){
+        state.filteredAllData = [...action.payload];
+        state.filteredAllData.sort(({ rating: a }, { rating: b }) =>
+          b - a
+          );
+      }
       else if (state.filterOption === "Not popular")
-        state.filteredAllData = action.payload.filter(
-          (favoriteItem) => favoriteItem.rating < 4
-        );
+        {
+        state.filteredAllData = [...action.payload];
+        state.filteredAllData.sort(({ rating: a }, { rating: b }) =>
+          a - b
+          );
+      }
       else if (state.filterOption === "Show all")
         state.filteredAllData = action.payload;
     },
@@ -58,6 +64,11 @@ const filterSlice = createSlice({
       state.favoriteList = [];
     }
   },
+  extraReducers: (builder) => {
+    builder.addCase(logOutUser.fulfilled, (state) => {
+      state.favoriteList = [];
+    })
+  }
 });
 
 export const {

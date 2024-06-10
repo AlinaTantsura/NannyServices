@@ -14,7 +14,13 @@ export const registerUser = createAsyncThunk(
     try {
       await createUserWithEmailAndPassword(auth, email, password);
       await updateProfile(auth.currentUser, { displayName: name });
-      return auth.currentUser;
+      const data = {
+        email: auth.currentUser.email,
+        token: auth.currentUser.accessToken,
+        id: auth.currentUser.accessToken,
+        name: auth.currentUser.displayName,
+      }
+      return data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.code);
     }
@@ -26,7 +32,13 @@ export const logInUser = createAsyncThunk(
   async ({ email, password }, thunkAPI) => {
     try {
       await signInWithEmailAndPassword(auth, email, password);
-      return auth.currentUser;
+      const data = {
+        email: auth.currentUser.email,
+        token: auth.currentUser.accessToken,
+        id: auth.currentUser.accessToken,
+        name: auth.currentUser.displayName,
+      }
+      return data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.code);
     }
