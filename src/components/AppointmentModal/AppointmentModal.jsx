@@ -87,7 +87,7 @@ const AppointmentModal = ({ imgURL, name, open, onClose }) => {
     toast.info(
       `Hello, ${data.name}. You appointment on ${data.time} was succesfully created`
     );
-    console.log(data.time);
+    console.log('Appointment data:', data);
     reset();
     onClose(true);
   };
