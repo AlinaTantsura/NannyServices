@@ -21,3 +21,8 @@ export const NanniesListStyled = styled.ul`
 export const LoadMoreBtn = styled(ButtonStyled)`
     margin-top: 64px;
 `;
+
+export const EmptyListText = styled.p`
+    margin-top: 30px;
+    font-family: var(--font-family-700);
+`;

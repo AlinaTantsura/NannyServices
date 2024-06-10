@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import NannyCard from "../NannyCard/NannyCard";
 import {
+  EmptyListText,
   LoadMoreBtn,
   NanniesListContainer,
   NanniesListStyled,
@@ -62,7 +63,7 @@ const NanniesList = () => {
   // console.log(filteredData)
   if(isLoad) return (<Loader />)
   return (
-    filteredData.length > 0 && (
+    filteredData.length > 0 ? (
       <NanniesListContainer>
         <NanniesListStyled>
           {filteredData &&
@@ -78,7 +79,12 @@ const NanniesList = () => {
           </LoadMoreBtn>
         )}
       </NanniesListContainer>
-    ) 
+    ) : (
+        <EmptyListText>
+      There are no items. Please, change filter
+      option
+    </EmptyListText>
+    )
   );
 
   

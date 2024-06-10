@@ -1,19 +1,23 @@
 import { useDispatch, useSelector } from "react-redux";
 import {
+  EmptyListText,
   LoadMoreBtn,
   NanniesListContainer,
   NanniesListStyled,
 } from "../NanniesList/NanniesList.styled";
 import NannyCard from "../NannyCard/NannyCard";
-import { selectFavoriteList, selectFilter, selectFilteredListAll } from "../../redux-toolkit/filter/selectors";
+import {
+  selectFavoriteList,
+  selectFilter,
+  selectFilteredListAll,
+} from "../../redux-toolkit/filter/selectors";
 import { useEffect, useState } from "react";
 import { filterData } from "../../redux-toolkit/filter/filterSlice";
-import { EmptyFavoriteText } from "./NanniesFavoriteList.styled";
 
 const NanniesFavoriteList = () => {
   const favList = useSelector(selectFavoriteList);
-   const filtredOption = useSelector(selectFilter)
-  const filteredList = useSelector(selectFilteredListAll)
+  const filtredOption = useSelector(selectFilter);
+  const filteredList = useSelector(selectFilteredListAll);
   const [isLoadMore, setisLoadMore] = useState(false);
   const [nextIndex, setNextIndex] = useState(3);
   const dispatch = useDispatch();
@@ -28,11 +32,10 @@ const NanniesFavoriteList = () => {
     } else {
       setisLoadMore(true);
     }
-
   }, [filteredList, nextIndex]);
 
   useEffect(() => {
-    if(favList) dispatch(filterData(favList))
+    if (favList) dispatch(filterData(favList));
   }, [dispatch, favList, filtredOption]);
 
   const handleLoadMore = () => {
@@ -58,12 +61,10 @@ const NanniesFavoriteList = () => {
       )}
     </NanniesListContainer>
   ) : (
-      // <EmptyFavoriteBox>
-        <EmptyFavoriteText>
+    <EmptyListText>
       There are no favorites. Please, choose one from the list or change filter
-          option
-          </EmptyFavoriteText>
-    // </NoFavoriteBox>
+      option
+    </EmptyListText>
   );
 };
 
