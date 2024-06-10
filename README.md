@@ -35,8 +35,9 @@ Nanny services is online platform designed to help parents find and select quali
 - Firebase
 - Vercel
 
-### Development Tools:
+### Development utilities:
 
+- Vite
 - VS Code
 - Git
 
